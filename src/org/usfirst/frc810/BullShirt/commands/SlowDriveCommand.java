@@ -48,7 +48,7 @@ public class SlowDriveCommand extends Command {
     	if(Math.abs(left)<.25) left = 0;
     	if(Math.abs(right)<.25) right = 0;
     	
-    	Robot.drive.tankDrive(left/2,right/2);
+    	Robot.drive.tankDrive(left*.7,right*.7);
     }
 
     // Make this return true when this Command no longer needs to run execute()
