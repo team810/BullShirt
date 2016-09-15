@@ -66,7 +66,9 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
+    	for(int i = 1; i<=8; i++){
+    		Robot.cannon.closeValve(i);
+    	}
     }
 
     public void disabledPeriodic() {
@@ -91,6 +93,12 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        
+        for(int i = 5; i<=8; i++){
+        	Robot.cannon.openValve(i);
+        }
+        
+      
     }
 
     /**
@@ -98,6 +106,11 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        if(Robot.oi.getGamepad().getRawButton(6)){
+        	RobotMap.cannonCompressor.setClosedLoopControl(true);
+        } else{
+        	RobotMap.cannonCompressor.setClosedLoopControl(false);
+        }
     }
 
     /**

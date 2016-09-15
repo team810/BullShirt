@@ -42,13 +42,14 @@ public class SlowDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double left = Robot.oi.getGamepad().getRawAxis(1);
-    	double right = Robot.oi.getGamepad().getRawAxis(3);
+    	double forStick = Robot.oi.getGamepad().getRawAxis(1);
+    	double sideStick = Robot.oi.getGamepad().getRawAxis(2);
     	
-    	if(Math.abs(left)<.25) left = 0;
-    	if(Math.abs(right)<.25) right = 0;
+    	if(Math.abs(forStick)<.1) forStick = 0;
+    	if(Math.abs(sideStick)<.1) sideStick = 0;
     	
-    	Robot.drive.tankDrive(left*.7,right*.7);
+    	sideStick *= .5;
+    	Robot.drive.arcadeDrive(forStick * .7, sideStick * .7);
     }
 
     // Make this return true when this Command no longer needs to run execute()
