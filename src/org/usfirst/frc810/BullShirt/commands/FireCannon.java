@@ -52,34 +52,53 @@ public class FireCannon extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	if(!started && !safetyBad){
-    		if(Robot.oi.getGamepad().getRawButton(m_SafetyButton)){
-        		Robot.cannon.closeValve(m_CannonNumber+4);
+    	if(!started && !safetyBad)
+    	{
+    	
+    		if(Robot.oi.getGamepad().getRawButton(m_SafetyButton))
+    		{
+        	
+    			Robot.cannon.closeValve(m_CannonNumber + 4);
         		Robot.cannon.openValve(m_CannonNumber);
-        		finishTime = System.currentTimeMillis()+250;
+        		finishTime = System.currentTimeMillis()+150;
         		started=true;
         		System.out.println("Started 1" + m_CannonNumber);
-        	}
-    		else{
+        	
+    		}
+    		else
+    		{
+    		
     			Robot.cannon.closeValve(m_CannonNumber);
-        		Robot.cannon.openValve(m_CannonNumber+4);
+        		Robot.cannon.openValve(m_CannonNumber + 4);
     			safetyBad = true;
     			System.out.println("Started 2");
+    		
     		}
+    		
     	}
-    	else{
-    		if(!Robot.oi.gamepad.getRawButton(m_SafetyButton)||safetyBad){
+    	else
+    	{
+    		
+    		if(!Robot.oi.gamepad.getRawButton(m_SafetyButton) || safetyBad)
+    		{
+    		
     			Robot.cannon.closeValve(m_CannonNumber);
-    			Robot.cannon.openValve(m_CannonNumber+4);
+    			Robot.cannon.openValve(m_CannonNumber + 4);
     			safetyBad=true;
     			System.out.println("Safety bad");
+    		
     		}
-    		else{
+    		else
+    		{
+    		
     			Robot.cannon.openValve(m_CannonNumber);
     			Robot.cannon.closeValve(m_CannonNumber+4);
     			System.out.println("Cannon " + m_CannonNumber + " Open");
+    		
     		}
     	}
+    	
+    	
     
     }
     // Make this return true when this Command no longer needs to run execute()
